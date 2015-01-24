@@ -16,6 +16,15 @@ import org.junit.runner.RunWith;
 public class MemoryCapTest {
     private static List<Object> hoggedMemory = new ArrayList<Object>();
     
+    // TODO: this one should fail :\
+    // TODO: Eclipse guys well may have done most of the work for me
+    // https://eclipse.googlesource.com/jdt/eclipse.jdt.ui/+/Branch21/org.eclipse.jdt.junit/src/org/eclipse/jdt/internal/junit/runner/RemoteTestRunner.java 
+    @CanRunInAHeapOf(megabytes=20)
+    @Test
+    public void test() {
+        throw new RuntimeException();
+    }
+    
     @Test
     @CanRunInAHeapOf(megabytes=16)
     public void testBasicOkCaseIsPossible() {}
@@ -27,8 +36,6 @@ public class MemoryCapTest {
         
         Assert.fail("The test should have failed earlier");
     }
-    
-    // TODO: stacktrace should be useful
     
     @Test
     @CanRunInAHeapOf(megabytes=20)
@@ -87,6 +94,6 @@ public class MemoryCapTest {
     }
     
     private static class MyException extends RuntimeException {
-        
+        private static final long serialVersionUID = 1L;        
     }
 }
