@@ -14,17 +14,6 @@ import org.junit.runner.RunWith;
 
 @RunWith(JmemRunner.class)
 public class MemoryCapTest {
-    private static List<Object> hoggedMemory = new ArrayList<Object>();
-    
-    // TODO: this one should fail :\
-    // TODO: Eclipse guys well may have done most of the work for me
-    // https://eclipse.googlesource.com/jdt/eclipse.jdt.ui/+/Branch21/org.eclipse.jdt.junit/src/org/eclipse/jdt/internal/junit/runner/RemoteTestRunner.java 
-    @CanRunInAHeapOf(megabytes=20)
-    @Test
-    public void test() {
-        throw new RuntimeException();
-    }
-    
     @Test
     @CanRunInAHeapOf(megabytes=16)
     public void testBasicOkCaseIsPossible() {}
@@ -77,7 +66,7 @@ public class MemoryCapTest {
     @Test
     @CanRunInAHeapOf(megabytes=17)
     public void testThatAfterMethodIsNotTriggeredBeforeMethodRunFinished() {
-        Assert.assertTrue(afterMethodRan);
+        Assert.assertFalse(afterMethodRan);
     }
     
     @Test(expected=MyException.class)
@@ -86,6 +75,7 @@ public class MemoryCapTest {
         throw new MyException();
     }
 
+    private static List<Object> hoggedMemory = new ArrayList<Object>();
     private void hogMemory(int megabytes) {
         for (int i=0; i<megabytes * 1024; i++) {
             byte[] arr = new byte[1024];

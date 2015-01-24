@@ -12,7 +12,7 @@ import org.junit.runners.model.Statement;
 
 public class JmemRunner extends BlockJUnit4ClassRunner {
     // TODO: this looks like a sign of doing too much stuff with a single class
-    private boolean child;
+    private boolean forkAllowed = true;
     
     public JmemRunner(Class<?> klass) throws InitializationError {
         super(klass);
@@ -21,7 +21,7 @@ public class JmemRunner extends BlockJUnit4ClassRunner {
     @Override
     protected Statement methodInvoker(final FrameworkMethod method, Object test) {
         final Statement original = super.methodInvoker(method, test);
-        if (child) {
+        if (!forkAllowed) {
             return original;
         }
         
@@ -47,7 +47,8 @@ public class JmemRunner extends BlockJUnit4ClassRunner {
             return super.possiblyExpectingExceptions(method, test, next);
         }
         
-        if (!child) {
+        // exceptions gonna be caught on forks, so master(forkAllowed=true) should not have concept of expected ones
+        if (forkAllowed) {
             return next;
         }
         
@@ -70,7 +71,7 @@ public class JmemRunner extends BlockJUnit4ClassRunner {
                 getInputArguments().toString().indexOf("-agentlib:jdwp") > 0;
     }
     
-    public void setChild(boolean child) {
-        this.child = child;
+    public void setForkAllowed(boolean forkAllowed) {
+        this.forkAllowed = forkAllowed;
     }
 }

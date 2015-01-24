@@ -1,7 +1,8 @@
 package com.clueprints.internal;
 
-import com.clueprints.ChildProcessMainThreadException;
 import com.clueprints.CanRunInAHeapOf;
+
+import com.clueprints.ChildProcessMainThreadException;
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,12 +15,15 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.junit.runner.Result;
 import org.junit.runners.model.FrameworkMethod;
 
+// Although Eclipse guys did something like this, the instance there is reused making things faster but no suitable for isolation guarantees I want here
+// https://eclipse.googlesource.com/jdt/eclipse.jdt.ui/+/Branch21/org.eclipse.jdt.junit/src/org/eclipse/jdt/internal/junit/runner/RemoteTestRunner.java 
 public class ChildProcessCall implements ExecutionInterface {
     private static SameProcessCall sameProcessCall = new SameProcessCall();
     
-    public void runTest(Class<?> testClass, FrameworkMethod method) {
+    public Result runTest(Class<?> testClass, FrameworkMethod method) {
         try {
             String classpathParam = System.getProperty("java.class.path");
             System.out.println("Starting with classpath: " + classpathParam);
@@ -42,6 +46,9 @@ public class ChildProcessCall implements ExecutionInterface {
             // TODO: timeout
             p.waitFor();
             ChildProcessResult result = readResult(tempFile);
+            if (result.getJunitResult() != null) {
+                return result.getJunitResult();
+            }
             if (result.getMainThreadException() != null) {
                 throw new ChildProcessMainThreadException(result.getMainThreadException());
             }
@@ -50,6 +57,7 @@ public class ChildProcessCall implements ExecutionInterface {
         } catch (InterruptedException ex) {
             throw new RuntimeException(ex);
         }
+        throw new IllegalStateException("This should not happen. Contact devs");
     }
 
     private ChildProcessResult readResult(File tempFile) throws IOException {
@@ -93,7 +101,8 @@ public class ChildProcessCall implements ExecutionInterface {
         
         ChildProcessResult res = new ChildProcessResult();
         try {
-            sameProcessCall.runTest(klass, new FrameworkMethod(method));
+            Result junitResult = sameProcessCall.runTest(klass, new FrameworkMethod(method));
+            res.setJunitResult(junitResult);
         } catch (Throwable ex) {
             ex.printStackTrace();
             res.setMainThreadException(ex);
