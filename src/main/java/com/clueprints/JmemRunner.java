@@ -1,5 +1,7 @@
 package com.clueprints;
 
+import org.junit.internal.runners.statements.ExpectException;
+
 import com.clueprints.internal.CallAdapter;
 import com.clueprints.internal.ChildProcessCall;
 import com.clueprints.internal.ExecutionInterface;
@@ -44,7 +46,7 @@ public class JmemRunner extends BlockJUnit4ClassRunner {
         
         Class<? extends Throwable> expectedException = getExpectedException(annotation);
         if (expectedException == ChildProcessMainThreadException.class) {
-            return super.possiblyExpectingExceptions(method, test, next);
+            return new ExpectException(next, getExpectedException(annotation));
         }
         
         // exceptions gonna be caught on forks, so master(forkAllowed=true) should not have concept of expected ones
@@ -52,7 +54,7 @@ public class JmemRunner extends BlockJUnit4ClassRunner {
             return next;
         }
         
-        return super.possiblyExpectingExceptions(method, test, next);                
+        return new ExpectException(next, getExpectedException(annotation));
     }
     
     private boolean expectsException(Test annotation) {
