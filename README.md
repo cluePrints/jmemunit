@@ -6,7 +6,7 @@ Verify your assumptions about memory usage / GC footprint of your components aut
 If you're a geek(or working in a mission-critical environment), you'll be using this from the beginning.
 Slackers like me will use it for TDD-style fixes to memory leaks - regressions no more!
 
-## Example: verifying memory consumption of a code fragment in isolation
+## Example 1: verifying memory consumption of a code fragment in isolation
 
     @RunWith(JmemRunner.class)
     public class MemoryCapTest {
@@ -33,6 +33,11 @@ Slackers like me will use it for TDD-style fixes to memory leaks - regressions n
             }
         }
     }
+
+## Example 2: Asserting object is subject to GC
+
+    WeakReference<T> referenceToYourObject = ...;
+    MemAssert.assertGc(referenceToYourObject);
 
 # Future plans
 * Assert amount of garbage generated(wink HPC folks)
