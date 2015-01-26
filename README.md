@@ -41,7 +41,6 @@ Slackers like me will use it for TDD-style fixes to memory leaks - regressions n
 
 # Future plans
 * Assert amount of garbage generated(wink HPC folks)
-* Assert a particular object is subject to GC(yay TDD style fixes of memory leaks)
 * Automate comparing heapdumps with baseline ones
 
 # Other
