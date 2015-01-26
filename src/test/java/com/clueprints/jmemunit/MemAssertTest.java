@@ -1,4 +1,6 @@
-package com.clueprints;
+package com.clueprints.jmemunit;
+
+import com.clueprints.jmemunit.MemAssert;
 
 import java.lang.ref.WeakReference;
 import org.junit.Assert;

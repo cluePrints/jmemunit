@@ -1,8 +1,8 @@
-package com.clueprints.internal;
+package com.clueprints.jmemunit.internal;
 
-import com.clueprints.CanRunInAHeapOf;
+import com.clueprints.jmemunit.ChildProcessMainThreadException;
 
-import com.clueprints.ChildProcessMainThreadException;
+import com.clueprints.jmemunit.CanRunInAHeapOf;
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;

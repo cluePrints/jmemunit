@@ -1,12 +1,11 @@
-package com.clueprints;
+package com.clueprints.jmemunit;
 
-import org.junit.internal.runners.statements.ExpectException;
-
-import com.clueprints.internal.CallAdapter;
-import com.clueprints.internal.ChildProcessCall;
-import com.clueprints.internal.ExecutionInterface;
-import com.clueprints.internal.SameProcessCall;
+import com.clueprints.jmemunit.internal.CallAdapter;
+import com.clueprints.jmemunit.internal.ChildProcessCall;
+import com.clueprints.jmemunit.internal.ExecutionInterface;
+import com.clueprints.jmemunit.internal.SameProcessCall;
 import org.junit.Test;
+import org.junit.internal.runners.statements.ExpectException;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;

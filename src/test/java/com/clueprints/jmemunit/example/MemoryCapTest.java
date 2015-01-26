@@ -1,8 +1,9 @@
-package com.clueprints.example;
+package com.clueprints.jmemunit.example;
 
-import com.clueprints.CanRunInAHeapOf;
-import com.clueprints.ChildProcessMainThreadException;
-import com.clueprints.JmemRunner;
+import com.clueprints.jmemunit.ChildProcessMainThreadException;
+import com.clueprints.jmemunit.JmemRunner;
+
+import com.clueprints.jmemunit.CanRunInAHeapOf;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;

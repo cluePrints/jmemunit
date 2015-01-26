@@ -1,6 +1,7 @@
-package com.clueprints.internal;
+package com.clueprints.jmemunit.internal;
 
-import com.clueprints.JmemRunner;
+import com.clueprints.jmemunit.JmemRunner;
+
 import org.junit.Assert;
 import org.junit.runner.Description;
 import org.junit.runner.Result;

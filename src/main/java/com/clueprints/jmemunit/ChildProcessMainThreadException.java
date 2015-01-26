@@ -1,4 +1,4 @@
-package com.clueprints;
+package com.clueprints.jmemunit;
 
 public class ChildProcessMainThreadException extends RuntimeException {    
     private static final long serialVersionUID = 1L;

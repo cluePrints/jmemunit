@@ -1,7 +1,8 @@
-package com.clueprints.example;
+package com.clueprints.jmemunit.example;
 
-import com.clueprints.CanRunInAHeapOf;
-import com.clueprints.JmemRunner;
+import com.clueprints.jmemunit.JmemRunner;
+
+import com.clueprints.jmemunit.CanRunInAHeapOf;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Ignore;

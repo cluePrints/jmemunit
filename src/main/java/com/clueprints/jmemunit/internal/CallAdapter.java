@@ -1,4 +1,4 @@
-package com.clueprints.internal;
+package com.clueprints.jmemunit.internal;
 
 import java.util.ArrayList;
 import java.util.List;

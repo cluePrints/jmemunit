@@ -1,4 +1,4 @@
-package com.clueprints;
+package com.clueprints.jmemunit;
 
 import java.lang.management.GarbageCollectorMXBean;
 import java.lang.management.ManagementFactory;

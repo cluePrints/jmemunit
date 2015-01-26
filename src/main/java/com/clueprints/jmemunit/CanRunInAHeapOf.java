@@ -1,4 +1,4 @@
-package com.clueprints;
+package com.clueprints.jmemunit;
 import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

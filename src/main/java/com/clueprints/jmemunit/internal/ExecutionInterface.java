@@ -1,4 +1,4 @@
-package com.clueprints.internal;
+package com.clueprints.jmemunit.internal;
 
 import org.junit.runner.Result;
 import org.junit.runners.model.FrameworkMethod;
